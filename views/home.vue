@@ -9,7 +9,8 @@
       <div v-if="Tshow">
         <div class="content-wrapper">
           <div class="introduction">
-            这是一个纯粹的 VNDB 搜索客户端。 我们利用 VNDB API 将庞大的数据库进行了结构化精简<br />
+            这是一个纯粹的 VNDB 搜索客户端<br />
+            我们利用 VNDB API 将庞大的数据库进行了结构化精简<br />
             相对于网页复杂的排版，V-Archive 专注于关键信息的提炼<br />
             查找评分、筛选标签还是阅览相关作，只有即搜即得的清爽体验
           </div>

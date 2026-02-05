@@ -33,10 +33,15 @@ export interface VQuery {
 
 // 输入数据
 export interface VResponse {
-  results: Array<any>
+  results: VGame[]
   count?: number
   more: boolean
 }
+
+/**
+ * 数据处理
+ */
+
 
 /**
  * 发送请求
