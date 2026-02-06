@@ -1,14 +1,5 @@
 <template>
   <div class="container">
-    <n-button
-      strong
-      secondary
-      type="success"
-      @click="router.back()"
-      style="font-size: 12px; position: absolute; left: 1vw; top: 1vh; z-index: 10"
-    >
-      < Back
-    </n-button>
 
     <div class="GameContent">
       <GD v-if="gameInfo" :info="gameInfo" />
@@ -22,11 +13,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { searchData, type VGame } from '../src/api/vndb'
 import GD from '../components/GameDetails.vue'
 
-const router = useRouter()
 const route = useRoute()
 const gameInfo = ref<VGame | null>(null)
 const NODATA = ref(false)

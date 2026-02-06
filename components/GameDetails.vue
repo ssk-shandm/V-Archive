@@ -55,11 +55,11 @@
       <!-- 下半部分 -->
       <n-grid-item v-if="info.relations && info.relations.length">
         <h3 class="section-title">相关游戏</h3>
-        <n-grid x-gap="12" y-gap="12" cols="2 s:3 m:4 l:5" responsive="screen">
-          <n-grid-item v-for="rel in info.relations" :key="rel.id">
-            <GameCard :info="rel" :tag="relationMap[rel.relation] || rel.relation" />
-          </n-grid-item>
-        </n-grid>
+        <GameWaterfall :list="info.relations">
+          <template #item="{ item }">
+            <GameCard :info="item" :tag="relationMap[item.relation] || item.relation" />
+          </template>
+        </GameWaterfall>
       </n-grid-item>
     </n-grid>
   </div>
@@ -68,6 +68,7 @@
 <script setup lang="ts">
 import type { VGame } from '../src/api/vndb'
 import GameCard from './GameCard.vue'
+import GameWaterfall from './GameWaterfall.vue'
 
 defineProps<{ info: VGame }>()
 
@@ -80,7 +81,7 @@ const realDescription = (text: string) => {
     .replace(/\[\/?(?:spoiler|quote)[^\]]*\]/g, '')
 }
 
-// [新增] 语言代码映射表
+// 语言代码映射表
 const langMap: Record<string, string> = {
   ja: '日语',
   en: '英语',
@@ -122,7 +123,6 @@ const formatLanguages = (codes: string[]) => {
   if (!codes) return ''
   return codes.map(code => langMap[code] || code).join(', ')
 }
-
 </script>
 
 <style scoped>

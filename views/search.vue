@@ -1,15 +1,6 @@
 <template>
   <div class="container">
     <n-space vertical size="large">
-      <n-button
-        strong
-        secondary
-        type="success"
-        @click="router.back()"
-        style="font-size: 12px; position: absolute; left: 1vw; top: 1vh; z-index: 20"
-      >
-        < Back
-      </n-button>
 
       <div class="input-wrapper" :class="{ 'center-mode': Centered }">
         <n-input
@@ -24,22 +15,15 @@
 
       <n-spin :show="loading">
         <div class="container-card">
-          <Waterfall
+          <GameWaterfall
             ref="waterfallRef"
             v-if="GList.length > 0"
             :list="GList"
-            :width="300"
-            :gutter="12"
-            :breakpoints="{
-              1200: { rowPerView: 4 },
-              800: { rowPerView: 3 },
-              500: { rowPerView: 2 }
-            }"
           >
             <template #item="{ item }">
               <GameCard :info="item" />
             </template>
-          </Waterfall>
+          </GameWaterfall>
 
           <n-result
             v-else-if="Searched"
@@ -56,9 +40,7 @@
 
 <script setup lang="ts">
 import { ref, nextTick, onActivated } from 'vue'
-import { useRouter } from 'vue-router'
-import { Waterfall } from 'vue-waterfall-plugin-next'
-import 'vue-waterfall-plugin-next/dist/style.css'
+import GameWaterfall from '../components/GameWaterfall.vue'
 import { searchData, type VGame } from '../src/api/vndb'
 import GameCard from '../components/GameCard.vue'
 
@@ -66,14 +48,11 @@ defineOptions({
   name: 'Search'
 })
 
-const router = useRouter()
 const GList = ref<VGame[]>([])
 const loading = ref(false)
 const Centered = ref(true)
 const Searched = ref(false)
 const keyword = ref('')
-
-// 拿到瀑布流组件的实例
 const waterfallRef = ref<any>(null)
 
 // 刷新瀑布流布局
